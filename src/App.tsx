@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { useState } from 'react'
+import { Grid, Container } from '@mui/material'
+import { TransactionList } from './components/TransactionList'
+import { FormComponent } from './components/FormComponent'
+import { fetchNewBalance } from './api/api'
+interface Transactions {
+    balance: number
+    accountId: string
+    amount?: number
 }
+export const App = () => {
+    // this is like merge 3 usestate together
+    const [transaction, setTransaction] = useState<Transactions>({
+        balance: 0,
+        accountId: '',
+        amount: 0,
+    })
+    console.log(transaction, 'trans')
 
-export default App;
+    const handleAddTranscription = async (
+        accountId: string,
+        amount: number
+    ) => {
+        if (accountId && amount) {
+            const newTransaction = { ...transaction, accountId, amount }
+            setTransaction(newTransaction)
+            await fetchNewBalance(accountId, (balance) => {
+                setTransaction((prev) => ({ ...prev, balance }))
+            })
+        } else {
+            console.log('error')
+        }
+    }
+    return (
+        <Container sx={{ marginTop: 4 }}>
+            <Grid container spacing={4}>
+                <Grid item xs={12} md={6}>
+                    <FormComponent onAddTransaction={handleAddTranscription} />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TransactionList {...transaction} />
+                </Grid>
+            </Grid>
+        </Container>
+    )
+}
