@@ -29,13 +29,14 @@ jobs:
         context: ./
 
     - name: Install Flyctl
-      uses: superfly/flyctl-actions/setup-flyctl@v1
-      with:
-        version: v0.2.125  # Ensure this is the latest version if necessary
+      run: curl -L https://fly.io/install.sh | sh
+
     - name: Check Flyctl version
       run: flyctl version
-      - name: Check if Flyctl is installed
+
+    - name: Check Flyctl PATH
       run: |
+        echo $PATH
         if ! command -v flyctl &> /dev/null
         then
           echo "Flyctl could not be found"
@@ -43,10 +44,12 @@ jobs:
         else
           echo "Flyctl is installed"
         fi
-    - name: Authenticate with Fly.io
-      run: flyctl auth token
-      env:
-        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN2 }}
+
+    - name: Check Flyctl Authentication
+      run: |
+        echo "Attempting to authenticate with Flyctl"
+        flyctl auth token ${{ secrets.FLY_API_TOKEN2 }}
+        flyctl auth whoami
 
     - name: Deploy to Fly.io
       run: flyctl deploy --config ./fly.toml
