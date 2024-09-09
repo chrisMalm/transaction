@@ -34,6 +34,7 @@ on:
   push:
     branches:
       - main
+      - master
 
 jobs:
   build:
@@ -53,9 +54,6 @@ jobs:
         tags: |
           chrismalm/frontend:latest
           chrismalm/backend:latest
-        build-args: |
-          FRONTEND_DOCKERFILE=frontend/src/Dockerfile
-          BACKEND_DOCKERFILE=backend/src/Dockerfile
         file: |
           frontend/src/Dockerfile
           backend/src/Dockerfile
