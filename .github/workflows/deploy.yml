@@ -20,10 +20,10 @@ jobs:
           echo "PATH=/home/runner/.fly/bin:$PATH" >> $GITHUB_ENV
 
       - name: Authenticate with Fly.io
-        run: flyctl auth token ${{ secrets.FLY_API_TOKEN }}
+        run: flyctl auth token ${{ secrets.FLY_API_TOKE }}
 
       - name: Deploy to Fly.io
         run: flyctl deploy
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKE }}
 
