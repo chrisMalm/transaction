@@ -1,32 +1,4 @@
-    # name: Deploy to Fly.io
 
-    # on:
-    # push:
-    #     branches:
-    #     - master  # or the branch you want to trigger the deploy
-
-    # jobs:
-    # deploy:
-    #     runs-on: ubuntu-latest
-
-    #     steps:
-    #     - name: Checkout code
-    #         uses: actions/checkout@v4
-
-    #     - name: Set up Flyctl
-    #         uses: superfly/flyctl-actions/setup-flyctl@v1
-    #         with:
-    #         version: v0.2.125  # Ensure this is the latest version if necessary
-
-    #     - name: Authenticate with Fly.io
-    #         run: flyctl auth token ${{ secrets.FLY_API_TOKEN }}
-    #         env:
-    #         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-    #     - name: Deploy to Fly.io
-    #         run: flyctl deploy --remote-only
-    #         env:
-    #         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 name: Deploy to Fly.io
 
 on:
