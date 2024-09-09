@@ -1,15 +1,27 @@
+# version: '3'
+# services:
+#   frontend:
+#     build:
+#       context: ./frontend
+#       dockerfile: Dockerfile  # Optional, defaults to Dockerfile in the context
+#     ports:
+#       - "3000:80"
+
+#   backend:
+#     build:
+#       context: ./backend
+#       dockerfile: Dockerfile  # Optional, defaults to Dockerfile in the context
+#     ports:
+#       - "5000:5000"
+
 version: '3'
 services:
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile  # Optional, defaults to Dockerfile in the context
+    image: chrismalm/frontend:latest
     ports:
       - "3000:80"
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile  # Optional, defaults to Dockerfile in the context
+    image: chrismalm/backend:latest
     ports:
       - "5000:5000"
