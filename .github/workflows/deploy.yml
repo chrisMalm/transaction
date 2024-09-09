@@ -32,7 +32,17 @@ jobs:
       uses: superfly/flyctl-actions/setup-flyctl@v1
       with:
         version: v0.2.125  # Ensure this is the latest version if necessary
-
+    - name: Check Flyctl version
+      run: flyctl version
+      - name: Check if Flyctl is installed
+      run: |
+        if ! command -v flyctl &> /dev/null
+        then
+          echo "Flyctl could not be found"
+          exit 1
+        else
+          echo "Flyctl is installed"
+        fi
     - name: Authenticate with Fly.io
       run: flyctl auth token
       env:
