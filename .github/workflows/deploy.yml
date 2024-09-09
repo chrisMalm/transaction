@@ -53,9 +53,12 @@ jobs:
         tags: |
           chrismalm/frontend:latest
           chrismalm/backend:latest
+        build-args: |
+          FRONTEND_DOCKERFILE=frontend/src/Dockerfile
+          BACKEND_DOCKERFILE=backend/src/Dockerfile
         file: |
-          ./frontend/Dockerfile
-          ./backend/Dockerfile
+          frontend/src/Dockerfile
+          backend/src/Dockerfile
         context: ./
 
     - name: Install Flyctl
