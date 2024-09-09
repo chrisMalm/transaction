@@ -34,7 +34,6 @@ on:
   push:
     branches:
       - main
-      - master
 
 jobs:
   build:
@@ -47,21 +46,17 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
-    - name: Build and push frontend image
+    - name: Build and push Docker images
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: chrismalm/frontend:latest
-        file: frontend/Dockerfile
-        context: .
-
-    - name: Build and push backend image
-      uses: docker/build-push-action@v3
-      with:
-        push: true
-        tags: chrismalm/backend:latest
-        file: backend/Dockerfile
-        context: .
+        tags: |
+          chrismalm/frontend:latest
+          chrismalm/backend:latest
+        file: |
+          ./frontend/Dockerfile
+          ./backend/Dockerfile
+        context: ./
 
     - name: Install Flyctl
       run: curl -L https://fly.io/install.sh | sh
