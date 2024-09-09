@@ -19,11 +19,11 @@ jobs:
           version: v0.2.125  # Ensure this is the latest version if necessary
 
       - name: Authenticate with Fly.io
-        run: flyctl auth token ${{ secrets.FLY_API_TOKE }}
+        run: flyctl auth token ${{ secrets.FLY_API_TOKEN }}
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKE }}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
       - name: Deploy to Fly.io
         run: flyctl deploy --remote-only
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKE }}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
