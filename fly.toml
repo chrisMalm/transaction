@@ -1,21 +1,18 @@
-# fly.toml app configuration file generated for app-transactions on 2024-09-06T12:39:39+02:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
-app = 'app-transactions'
+app = "app-transactions"
 
 [build]
+  # Reference Docker Compose file directly
+  docker_compose_file = "./docker-compose.yml"
 
-[http_service]
+[[services]]
   internal_port = 3000
   force_https = true
-  auto_stop_machines = 'stop'
+  auto_stop_machines = "stop"
   auto_start_machines = true
   min_machines_running = 0
-  processes = ['app']
+  processes = ["app"]
 
 [[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
+  memory = "1gb"
+  cpu_kind = "shared"
   cpus = 1
