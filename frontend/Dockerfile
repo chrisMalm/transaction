@@ -8,7 +8,7 @@ WORKDIR /app
 RUN ls -la
 
 # Copy package.json and package-lock.json (relative to current context)
-COPY package.json package-lock.json ./
+COPY ./frontend/package.json ./fropntend/package-lock.json ./
 
 # Debug step: List files in /app after copying
 RUN ls -la
