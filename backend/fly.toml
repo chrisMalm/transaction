@@ -2,7 +2,7 @@ app = "backend-ancient-haze-9586"
 primary_region = "ams"
 
 [build]
-  dockerfile = "./Dockerfile"
+  dockerfile = "./src/Dockerfile"
 
 [[services]]
   internal_port = 5000
