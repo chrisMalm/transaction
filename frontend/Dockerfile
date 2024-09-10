@@ -4,6 +4,9 @@ FROM node:20-alpine AS build
 # Set the working directory in the container
 WORKDIR /app
 
+# Debug step: List files in /app
+RUN ls -la
+
 # Copy package.json and package-lock.json
 COPY package.json package-lock.json ./
 
