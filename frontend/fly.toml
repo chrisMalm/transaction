@@ -2,7 +2,7 @@ app = "frontend-blue-morning-132"
 primary_region = "ams"
 
 [build]
-  dockerfile = "./Dockerfile"
+  dockerfile = "./src/Dockerfile"
 
 [http_service]
   internal_port = 80
