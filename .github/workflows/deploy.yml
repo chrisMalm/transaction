@@ -27,7 +27,7 @@ jobs:
       with:
         push: true
         tags: chrismalm/frontend:latest
-        file: ./frontend/src/Dockerfile
+        file: ./frontend/Dockerfile
         context: ./frontend
 
     - name: Build and push backend Docker image
@@ -35,7 +35,7 @@ jobs:
       with:
         push: true
         tags: chrismalm/backend:latest
-        file: ./backend/src/Dockerfile
+        file: ./backend/Dockerfile
         context: ./backend
 
     - name: Install Flyctl
