@@ -16,14 +16,12 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
-    # Log in to Docker Hub
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # Build and push the frontend Docker image
     - name: Build and push frontend Docker image
       uses: docker/build-push-action@v2
       with:
@@ -32,7 +30,6 @@ jobs:
         file: ./frontend/Dockerfile
         context: ./frontend
 
-    # Build and push the backend Docker image
     - name: Build and push backend Docker image
       uses: docker/build-push-action@v2
       with:
@@ -48,10 +45,12 @@ jobs:
         export PATH="$FLYCTL_INSTALL/bin:$PATH"
         echo "$FLYCTL_INSTALL/bin" >> $GITHUB_PATH
 
-    - name: Authenticate with Flyctl
-      run: flyctl auth login --token ${{ secrets.FLY_API_TOKEN2 }}
+    - name: Set Fly.io API token
+      run: echo "FLY_API_TOKEN set"
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN2 }}
 
     - name: Deploy to Fly.io
       run: flyctl deploy --config ./fly.toml
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN2 }}
