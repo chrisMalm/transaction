@@ -43,19 +43,16 @@ jobs:
         curl -L https://fly.io/install.sh | sh
         echo "$HOME/.fly/bin" >> $GITHUB_PATH
 
-    - name: Set Fly.io API token
-      run: |
-        flyctl auth token ${{ secrets.FLY_API_TOKEN2 }}
-
     - name: Check Flyctl version
       run: flyctl version
 
+    - name: Set Fly.io API token
+      run: |
+        echo "Setting Fly.io API token"
+        echo "${{ secrets.FLY_API_TOKEN2 }}" | flyctl auth login --token
+
     - name: Deploy Frontend to Fly.io
       run: flyctl deploy --config ./frontend/fly.toml
-      env:
-        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN2 }}
 
     - name: Deploy Backend to Fly.io
       run: flyctl deploy --config ./backend/fly.toml
-      env:
-        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN2 }}
