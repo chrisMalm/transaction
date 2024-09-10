@@ -46,13 +46,9 @@ jobs:
     - name: Check Flyctl version
       run: flyctl version
 
-    - name: Set Fly.io API token
-      run: |
-        echo "Setting Fly.io API token"
-        echo "${{ secrets.FLY_API_TOKEN2 }}" | flyctl auth login --token
-
     - name: Deploy Frontend to Fly.io
-      run: flyctl deploy --config ./frontend/fly.toml
-
+      run: flyctl deploy --config ./frontend/fly.toml --access-token ${{ secrets.FLY_API_TOKEN2 }}
+    
     - name: Deploy Backend to Fly.io
-      run: flyctl deploy --config ./backend/fly.toml
+      run: flyctl deploy --config ./backend/fly.toml --access-token ${{ secrets.FLY_API_TOKEN2 }}
+    
