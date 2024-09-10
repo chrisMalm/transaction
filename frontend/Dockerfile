@@ -7,8 +7,9 @@ WORKDIR /app
 # Debug step: List files in /app
 RUN ls -la
 
-# Copy package.json and package-lock.json
-COPY ./frontend/package.json ./frontend/package-lock.json ./
+# Copy package.json and package-lock.json (relative to current context)
+COPY package.json package-lock.json ./
+
 
 # Install dependencies
 RUN npm install
