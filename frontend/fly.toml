@@ -1,0 +1,15 @@
+app = "frontend-app"
+
+[build]
+  dockerfile = "./frontend/Dockerfile"
+
+[http_service]
+  internal_port = 80
+  external_port = 80
+  force_https = true
+
+[[services]]
+  internal_port = 80
+  external_port = 80
+  force_https = true
+
